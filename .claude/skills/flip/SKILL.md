@@ -19,6 +19,8 @@ Look at the most recent conclusion or decision in the current discussion. Ask:
 
 Then examine the conclusion from that missing angle. Do NOT default to the opposite — that's only one possible shift. Identify the most revealing absent perspective and use it.
 
+If there is no clear conclusion yet (e.g. discussion is still exploratory), respond: "还没有明确的结论，换个角度看什么？试试 /flip <你的想法>"
+
 ### /flip <conclusion>
 
 Same as above, but applied to the explicitly stated conclusion. Example: `/flip "用 redis 做缓存"`
