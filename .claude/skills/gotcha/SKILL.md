@@ -40,9 +40,12 @@ fixed: false
 
 If user confirms, save to `.claude/gotchas/<slug>.md`.
 
-**Slug generation**: Derive from English tags using hyphens (e.g. `ci-oom-killed`). If the symptom is Chinese-only, slug using date: `YYYY-MM-DD-NNN`.
+**Slug generation**: Derive from English tags using hyphens (e.g. `ci-oom-killed`). If the symptom is Chinese-only, slug using date: `YYYY-MM-DD-NNN`. If the slug already exists, append `-2`, `-3`, etc. to avoid overwriting.
 
-**Before saving**: grep existing gotcha files for similar symptom keywords. If highly similar found, warn: "已有类似 gotcha: <filename>，还要保存吗？"
+**Before saving**, dedup behavior depends on `dedupCheck`:
+- `normal` (default): grep for similar symptom keywords. If highly similar found, warn: "已有类似 gotcha: <filename>，还要保存吗？"
+- `exact`: only block exact duplicate symptoms (same 症状 line text)
+- `off`: skip duplication check entirely
 
 **First save**: If `.claude/gotchas/` directory does not exist, create it with `mkdir -p`.
 
@@ -140,7 +143,9 @@ Configurable via skill parameters. Default values in settings.json:
 |---|---|---|
 | `hintLevel` | `normal` | `off` / `normal` / `high` |
 | `sessionReminder` | `on` | `on` / `off` |
-| `dedupCheck` | `normal` | `off` / `normal` / `strict` |
+| `dedupCheck` | `normal` | `off` / `normal` / `exact` |
+
+Override defaults temporarily with CLI flags: `/gotcha --hintLevel=off`, `/gotcha save --dedupCheck=exact`. Without flags, the settings.json defaults are used.
 
 ## Principles
 
