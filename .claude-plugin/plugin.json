@@ -1,11 +1,11 @@
 {
-  "name": "rethink-skills",
+  "name": "dejavu",
   "version": "1.0.0",
-  "description": "重新思考工具集：gotcha 复用过去踩过的坑 + flip 换个角度看当前的决策",
+  "description": "déjà vu for coding: gotcha 复用踩过的坑 + flip 换个角度看决策",
   "author": {
     "name": "michea11"
   },
-  "repository": "https://github.com/michea11/rethink-skills",
+  "repository": "https://github.com/michea11/dejavu",
   "license": "MIT",
   "keywords": [
     "debugging",

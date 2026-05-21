@@ -1,6 +1,6 @@
-# Gotcha + Flip
+# déjà vu
 
-重复经验复用工具集，两个 Claude Code 技能：
+déjà vu for coding：两个 Claude Code 技能，
 
 - **gotcha** — 踩坑记忆：排查问题后一键保存经验，下次遇到了直接查
 - **flip** — 换角度审视：做设计决策时，换个缺席的视角看结论，发现盲区
@@ -9,10 +9,10 @@
 
 ```bash
 # 添加市场
-/plugin marketplace add michea11/rethink-skills
+/plugin marketplace add michea11/dejavu
 
 # 安装
-/plugin install rethink-skills@michea11-rethink-skills
+/plugin install dejavu@michea11-dejavu
 ```
 
 ## 用法
