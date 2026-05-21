@@ -7,89 +7,90 @@
   <a href="README_ES.md">Español</a>
 </p>
 
----
+<p align="center">
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
+  <img src="https://img.shields.io/badge/platform-Claude%20Code%20%7C%20Codex%20%7C%20Cursor%20%7C%20Copilot%20%7C%20Gemini-blue" alt="Platform">
+  <img src="https://img.shields.io/badge/skills-gotcha%20%2B%20flip-orange" alt="Skills">
+</p>
+
+<br>
 
 # déjà vu
 
-> You shouldn't have to re-debug the same problem. You shouldn't make decisions from only one angle.
+<p align="center">
+  <em>Stop re-debugging the same bug. Stop re-thinking the same decision.<br>
+  Two skills. Zero dependencies. One command to remember everything.</em>
+</p>
 
-**déjà vu** is a Claude Code plugin with two zero-dependency skills purpose-built to eliminate wasteful re-thinking in AI-assisted coding.
+<br>
 
----
+## Why
+
+Every time your AI re-investigates a problem you already solved, you're burning **tokens, time, and flow state** — not GPU, but thinking.
+
+| Problem | Before | After déjà vu |
+|---|---|---|
+| Same error keeps coming back | 10+ rounds of debugging | `/gotcha <keyword>` — instant hit |
+| Nobody questions the design choice | Blind spot found in production | `/flip` — caught before you ship |
+| Hitting the same pitfall again | Start from zero every time | 3-second lookup |
+| Gut says something's off | Hesitate, ship anyway | Systematic review in one command |
+
+> **Every hit saves 90%+ of the tokens you'd spend re-investigating from scratch.**
+
+<br>
 
 ## Install
 
 ```bash
-# Add self-hosted marketplace (once)
-/plugin marketplace add michea11/dejavu
-
-# Install the plugin
-/plugin install dejavu@michea11-dejavu
+/plugin marketplace add michea11/dejavu    # once
+/plugin install dejavu@michea11-dejavu     # done
 ```
 
----
+That's it. Two slash commands ready.
+
+<br>
 
 ## Usage
 
 ```bash
-# gotcha — troubleshooting memory, grep + filesystem, zero deps
+# ── gotcha: troubleshooting memory ──
 
-/gotcha save              # Save the most recent debugging session as a gotcha
-/gotcha <keyword>         # Search matched gotchas, inject full content on hit
-/gotcha                    # List all gotchas, newest first
-/gotcha fix <slug>         # Mark as fixed (keeps record, annotates on future match)
-/gotcha delete <slug>      # Delete a gotcha (confirms first)
+/gotcha save
+# → scans the last debugging session, extracts symptom + root cause + fix
+# → presents a draft, you confirm → saved to .claude/gotchas/
 
-# flip — perspective shift, pure process skill, no file I/O
+/gotcha CI killed
+# → grep-searches your gotcha library in milliseconds
+# → single hit → injects the full gotcha. multiple hits → you pick.
 
-/flip                      # Examine the latest conclusion from a missing angle
-/flip "use redis for caching"  # Examine a specific conclusion
+/gotcha                    # → lists all gotchas, newest first
+/gotcha fix <slug>         # → marks as fixed (keeps the record)
+/gotcha delete <slug>      # → removes (asks first)
 ```
 
----
+```bash
+# ── flip: perspective shift ──
 
-## Why It Matters
+/flip
+# → "What angle are we missing?" → examines from that angle
 
-The biggest hidden cost of AI coding isn't GPU — it's **re-thinking things you already figured out**.
-
-| Scenario | Without déjà vu | With déjà vu |
-|---|---|---|
-| CI fails with last week's error | 10 rounds of debugging from scratch | `/gotcha CI killed` → instant fix |
-| You pick option A, nobody pushes back | Find the blind spot in production | `/flip` → catch it before you ship |
-| Third time hitting the same pitfall | Start over every time | Search gotcha → 3-second lookup |
-| Gut says something's off about this decision | Hesitate, move on anyway | `/flip` → systematic review |
-
-**Every hit saves not just tokens, but flow state and hours of conversation.**
-
----
-
-## Two Skills
-
-### gotcha — Troubleshooting Memory
-
-```
-Hit a bug → /gotcha save → store the fix → /gotcha <keyword> → instant recall
+/flip "use redis for caching"
+# → examines a specific conclusion from a missing perspective
 ```
 
-- grep-powered search, zero dependencies, millisecond response
-- No index pre-injection — zero token cost on miss
-- Gentle session-end reminder, never interrupts
+<br>
 
-### flip — Perspective Shift
+## Features
 
-```
-About to lock in a decision → /flip → find the missing angle → catch blind spots early
-```
+- **Zero dependencies** — grep + filesystem. No embeddings, no vector DB, no external API
+- **Zero token cost on miss** — no index pre-injection, no background matching, search only when you ask
+- **Cross-platform** — same SKILL.md works across Claude Code, Codex, Cursor, Copilot, Windsurf, Gemini CLI
+- **Non-intrusive** — you decide when to save. One gentle reminder at session end
+- **Plain markdown storage** — gotchas are `.md` files in `.claude/gotchas/`. Readable, editable, git-trackable
 
-- Never defaults to just "the opposite" — finds whatever perspective is absent
-- Cost, time, newcomer, extreme, scale — whatever angle is missing
-- Proactive hints at key decision points, quiet otherwise
-
----
+<br>
 
 ## Cross-Platform
-
-Same `SKILL.md` works across all major AI coding tools:
 
 | Tool | Skill Directory |
 |---|---|
@@ -100,13 +101,13 @@ Same `SKILL.md` works across all major AI coding tools:
 | Windsurf | `.windsurf/skills/` |
 | Gemini CLI | `.gemini/skills/` |
 
-Clone once, your tool picks up the right directory. Claude Code gets the full-featured version, other platforms get the universal subset.
+Clone once — your tool auto-loads the right directory.
 
----
+<br>
 
-## Design Philosophy
+## Design
 
-- **Don't burn your tokens** — No index pre-injection, no silent background matching, search only on demand
-- **No external dependencies** — grep + filesystem, no embedding APIs, no vector databases
-- **Don't break your flow** — You decide what to save, one gentle reminder at session end
-- **You make the call** — We surface experience and perspective, the conclusion is always yours
+- **Don't burn your tokens** — On-demand search only
+- **Don't break your flow** — You decide. Save, or don't.
+- **No magic** — grep + filesystem. Understandable, debuggable, zero cost
+- **You're in control** — We surface experience and perspective. The conclusion is yours

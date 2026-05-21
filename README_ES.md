@@ -7,90 +7,89 @@
   <a href="README_ES.md">Español</a>
 </p>
 
----
+<p align="center">
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
+  <img src="https://img.shields.io/badge/platform-Claude%20Code%20%7C%20Codex%20%7C%20Cursor%20%7C%20Copilot%20%7C%20Gemini-blue" alt="Platform">
+  <img src="https://img.shields.io/badge/skills-gotcha%20%2B%20flip-orange" alt="Skills">
+</p>
+
+<br>
 
 # déjà vu
 
-> No deberías tener que depurar el mismo problema dos veces.
-> No deberías tomar decisiones desde un solo ángulo.
+<p align="center">
+  <em>No vuelvas a depurar el mismo error. No tomes decisiones desde un solo ángulo.<br>
+  Dos habilidades. Cero dependencias. Un comando para recordarlo todo.</em>
+</p>
 
-**déjà vu** es un plugin de Claude Code con dos habilidades sin dependencias, diseñado para eliminar el desperdicio de "repensar" en la codificación con IA.
+<br>
 
----
+## Por qué
+
+El mayor costo oculto de la programación con IA no es la GPU — es **volver a pensar** lo que ya resolviste.
+
+| Escenario | Antes | Con déjà vu |
+|---|---|---|
+| El mismo error aparece otra vez | 10+ rondas de depuración | `/gotcha <clave>` — solución instantánea |
+| Nadie discute la decisión de diseño | Punto ciego encontrado en producción | `/flip` — detectado antes de publicar |
+| Tercera vez en el mismo problema | Empezar de cero | Búsqueda de 3 segundos |
+| Algo no cuadra, no sabes qué | Dudas, publicas igual | Revisión sistemática con un comando |
+
+> **Cada acierto ahorra más del 90% de los tokens que gastarías reinvestigando desde cero.**
+
+<br>
 
 ## Instalación
 
 ```bash
-# Añadir marketplace autogestionado (solo una vez)
-/plugin marketplace add michea11/dejavu
-
-# Instalar el plugin
-/plugin install dejavu@michea11-dejavu
+/plugin marketplace add michea11/dejavu    # una vez
+/plugin install dejavu@michea11-dejavu     # listo
 ```
 
----
+Solo dos comandos.
+
+<br>
 
 ## Uso
 
 ```bash
-# gotcha — memoria de resolución de problemas, grep + sistema de archivos, cero dependencias
+# ── gotcha: memoria de resolución ──
 
-/gotcha save              # Guarda la última sesión de depuración como gotcha
-/gotcha <palabra clave>   # Busca gotchas coincidentes, inyecta contenido al acertar
-/gotcha                    # Lista todos los gotchas, más recientes primero
-/gotcha fix <slug>         # Marcar como corregido (conserva registro, anota en futuras coincidencias)
-/gotcha delete <slug>      # Elimina un gotcha (solicita confirmación)
+/gotcha save
+# → escanea la última sesión de depuración, extrae síntoma + causa + solución
+# → presenta un borrador, confirmas → guardado en .claude/gotchas/
 
-# flip — cambio de perspectiva, habilidad de proceso puro, sin I/O de archivos
+/gotcha CI killed
+# → búsqueda grep en milisegundos. Un resultado → inyecta. Varios → tú eliges.
 
-/flip                      # Examina la última conclusión desde un ángulo faltante
-/flip "usar redis para caché"  # Examina una conclusión específica
+/gotcha                    # → lista todos, más recientes primero
+/gotcha fix <slug>         # → marca como corregido (conserva el registro)
+/gotcha delete <slug>      # → elimina (pide confirmación)
 ```
 
----
+```bash
+# ── flip: cambio de perspectiva ──
 
-## Por Qué Importa
+/flip
+# → "¿Qué ángulo nos falta?" → examina desde esa perspectiva ausente
 
-El mayor costo oculto de la codificación con IA no es la GPU — es **volver a pensar lo que ya resolviste**.
-
-| Escenario | Sin déjà vu | Con déjà vu |
-|---|---|---|
-| CI falla con el error de la semana pasada | 10 rondas de depuración desde cero | `/gotcha CI killed` → solución instantánea |
-| Eliges la opción A, nadie objeta | Encuentras el punto ciego en producción | `/flip` → lo detectas antes de publicar |
-| Tercera vez en el mismo problema | Empezar de cero cada vez | Buscar gotcha → consulta de 3 segundos |
-| Algo no te cuadra de esta decisión | Dudas, sigues adelante | `/flip` → revisión sistemática |
-
-**Cada acierto no solo ahorra tokens, sino el estado de concentración y horas de conversación.**
-
----
-
-## Dos Habilidades
-
-### gotcha — Memoria de Resolución de Problemas
-
-```
-Encuentras un bug → /gotcha save → guardas la solución → /gotcha <palabra clave> → recuerdo instantáneo
+/flip "usar redis para caché"
+# → examina una conclusión específica desde un ángulo ausente
 ```
 
-- Búsqueda basada en grep, cero dependencias, respuesta en milisegundos
-- Sin preinyección de índices — costo cero de tokens si no hay coincidencia
-- Recordatorio suave al final de la sesión, nunca interrumpe
+<br>
 
-### flip — Cambio de Perspectiva
+## Características
 
-```
-A punto de decidir → /flip → encuentra el ángulo faltante → detecta puntos ciegos a tiempo
-```
+- **Cero dependencias** — grep + sistema de archivos. Sin APIs de embeddings, sin bases de datos vectoriales
+- **Costo cero de tokens si no hay coincidencia** — sin preinyección de índices, sin búsqueda en segundo plano
+- **Multiplataforma** — el mismo SKILL.md funciona en Claude Code / Codex / Cursor / Copilot / Windsurf / Gemini CLI
+- **No intrusivo** — tú decides cuándo guardar. Un recordatorio suave al final de la sesión
+- **Almacenamiento Markdown** — los gotchas son archivos `.md`. Legibles, editables, rastreables con git
 
-- Nunca se limita a "lo opuesto" — encuentra cualquier perspectiva ausente
-- Costo, tiempo, recién llegado, caso extremo, escala — cualquier ángulo faltante
-- Sugerencias proactivas en puntos clave de decisión, discreto el resto del tiempo
-
----
+<br>
 
 ## Multiplataforma
-
-El mismo `SKILL.md` funciona en todas las principales herramientas de codificación con IA:
 
 | Herramienta | Directorio de Habilidades |
 |---|---|
@@ -101,13 +100,13 @@ El mismo `SKILL.md` funciona en todas las principales herramientas de codificaci
 | Windsurf | `.windsurf/skills/` |
 | Gemini CLI | `.gemini/skills/` |
 
-Clona una vez, tu herramienta carga automáticamente el directorio correcto. Claude Code obtiene la versión completa, otras plataformas obtienen el subconjunto universal.
+Clona una vez — tu herramienta carga automáticamente el directorio correcto.
 
----
+<br>
 
-## Filosofía de Diseño
+## Filosofía
 
-- **No quemes tus tokens** — Sin preinyección de índices, sin búsqueda silenciosa en segundo plano, solo bajo demanda
-- **Sin dependencias externas** — grep + sistema de archivos, sin APIs de embeddings, sin bases de datos vectoriales
-- **No interrumpas tu flujo** — Tú decides qué guardar, un recordatorio suave al final de la sesión
-- **Tú tomas las decisiones** — Ofrecemos experiencia y perspectiva, la conclusión siempre es tuya
+- **No quemes tus tokens** — búsqueda solo bajo demanda
+- **No interrumpas tu flujo** — tú decides qué guardar
+- **Sin magia** — grep + sistema de archivos. Comprensible, depurable, costo cero
+- **Tú tienes el control** — ofrecemos experiencia y perspectiva, la conclusión es tuya
