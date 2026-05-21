@@ -49,7 +49,10 @@ AI 编码最大的隐性成本不是 GPU，是 **重复思考**。
 ## 安装
 
 ```bash
+# 添加自托管市场（只需一次）
 /plugin marketplace add michea11/dejavu
+
+# 安装插件
 /plugin install dejavu@michea11-dejavu
 ```
 
@@ -58,14 +61,18 @@ AI 编码最大的隐性成本不是 GPU，是 **重复思考**。
 ## 用法
 
 ```bash
-/gotcha save              # 把最近一次排查存成经验
-/gotcha <关键词>           # 搜索已有经验
-/gotcha                    # 列出所有经验
-/gotcha fix <slug>         # 标记已修复
-/gotcha delete <slug>      # 删除
+# gotcha —— 踩坑记忆，grep + 文件系统，零依赖
 
-/flip                      # 换个角度看当前结论
-/flip "用 redis 做缓存"     # 审视指定结论
+/gotcha save              # 把最近一次排查过程存成 experience
+/gotcha <关键词>           # 搜索匹配的 experience，命中则注入完整内容
+/gotcha                    # 列出所有 experience，按时间倒序
+/gotcha fix <slug>         # 标记已修复（不删除，下次匹配时提示）
+/gotcha delete <slug>      # 删除指定 experience（会先确认）
+
+# flip —— 换角度审视，纯过程技能，不读写文件
+
+/flip                      # 对当前讨论的最新结论，找个缺席的视角审视
+/flip "用 redis 做缓存"     # 对指定结论做审视
 ```
 
 ---
