@@ -1,3 +1,12 @@
+<p align="center">
+  <a href="#-中文"><img src="https://img.shields.io/badge/中文-🇨🇳-red?style=for-the-badge" alt="中文"></a>
+  <a href="#-english"><img src="https://img.shields.io/badge/English-🇺🇸-blue?style=for-the-badge" alt="English"></a>
+</p>
+
+---
+
+# 🇨🇳 中文
+
 # déjà vu
 
 > 你已经踩过的坑，不应该再花 token 重新排一遍。
@@ -34,6 +43,18 @@ AI 编码最大的隐性成本不是 GPU，是 **重复思考**。
 - 不注入索引，不命中零 token 开销
 - 会话结束弱提醒，不骚扰
 
+### flip — 换角度审视
+
+```
+快下结论了 → /flip → 找到缺席的视角 → 发现盲区 → 趁早修正
+```
+
+- 不机械站对立面，动态选最可能发现问题的角度
+- 成本、时间、新人、极端、放大…什么缺席看什么
+- 关键决策时主动建议，平时不打扰
+
+---
+
 ## 跨平台支持
 
 同一个 SKILL.md，所有主流 AI 编码工具都能用：
@@ -47,17 +68,7 @@ AI 编码最大的隐性成本不是 GPU，是 **重复思考**。
 | Windsurf | `.windsurf/skills/` |
 | Gemini CLI | `.gemini/skills/` |
 
-克隆仓库后，你的工具会自动加载对应目录的技能。Claude Code 版本保留完整功能（`allowed-tools`、`argument-hint`），其他平台版本仅去掉平台专属字段。
-
-### flip — 换角度审视
-
-```
-快下结论了 → /flip → 找到缺席的视角 → 发现盲区 → 趁早修正
-```
-
-- 不机械站对立面，动态选最可能发现问题的角度
-- 成本、时间、新人、极端、放大…什么缺席看什么
-- 关键决策时主动建议，平时不打扰
+克隆仓库后，你的工具会自动加载对应目录的技能。Claude Code 版本保留完整功能，其他平台仅去掉平台专属字段。
 
 ---
 
@@ -98,3 +109,113 @@ AI 编码最大的隐性成本不是 GPU，是 **重复思考**。
 - **不依赖外部服务** — grep + 文件系统，没有 embedding API、没有向量数据库
 - **不打断你的心流** — 存不存你说了算，只在会话结束弱提醒一句
 - **不替你做决定** — 只提供经验和视角，结论永远在你
+
+---
+
+<br>
+<br>
+
+# 🇺🇸 English
+
+# déjà vu
+
+> You shouldn't have to re-debug the same problem.
+> You shouldn't make decisions from only one angle.
+
+**déjà vu** is a Claude Code plugin with two zero-dependency skills purpose-built to eliminate wasteful re-thinking in AI-assisted coding.
+
+---
+
+## Why It Matters
+
+The biggest hidden cost of AI coding isn't GPU — it's **re-thinking things you already figured out**.
+
+| Scenario | Without déjà vu | With déjà vu |
+|---|---|---|
+| CI fails with last week's error | 10 rounds of debugging from scratch | `/gotcha CI killed` → instant fix |
+| You pick option A, nobody pushes back | Find the blind spot in production | `/flip` → catch it before you ship |
+| Third time hitting the same pitfall | Start over every time | Search gotcha → 3-second lookup |
+| Gut says something's off about this decision | Hesitate, move on anyway | `/flip` → systematic review |
+
+**Every hit saves not just tokens, but flow state and hours of conversation.**
+
+---
+
+## Two Skills
+
+### gotcha — Troubleshooting Memory
+
+```
+Hit a bug → /gotcha save → store the fix → /gotcha <keyword> → instant recall
+```
+
+- grep-powered search, zero dependencies, millisecond response
+- No index pre-injection — zero token cost on miss
+- Gentle session-end reminder, never interrupts
+
+### flip — Perspective Shift
+
+```
+About to lock in a decision → /flip → find the missing angle → catch blind spots early
+```
+
+- Never defaults to just "the opposite" — finds whatever perspective is absent
+- Cost, time, newcomer, extreme, scale — whatever angle is missing
+- Proactive hints at key decision points, quiet otherwise
+
+---
+
+## Cross-Platform
+
+Same `SKILL.md` works across all major AI coding tools:
+
+| Tool | Skill Directory |
+|---|---|
+| Claude Code | `.claude/skills/` |
+| OpenAI Codex CLI | `.agents/skills/` |
+| Cursor | `.cursor/skills/` |
+| GitHub Copilot | `.github/skills/` |
+| Windsurf | `.windsurf/skills/` |
+| Gemini CLI | `.gemini/skills/` |
+
+Clone once, your tool picks up the right directory. Claude Code gets the full-featured version, other platforms get the universal subset.
+
+---
+
+## Install
+
+```bash
+# Add self-hosted marketplace (once)
+/plugin marketplace add michea11/dejavu
+
+# Install the plugin
+/plugin install dejavu@michea11-dejavu
+```
+
+---
+
+## Usage
+
+```bash
+# gotcha — troubleshooting memory, grep + filesystem, zero deps
+
+/gotcha save              # Save the most recent debugging session as a gotcha
+/gotcha <keyword>         # Search matched gotchas, inject full content on hit
+/gotcha                    # List all gotchas, newest first
+/gotcha fix <slug>         # Mark as fixed (keeps record, annotates on future match)
+/gotcha delete <slug>      # Delete a gotcha (confirms first)
+
+# flip — perspective shift, pure process skill, no file I/O
+
+/flip                      # Examine the latest conclusion from a missing angle
+/flip "use redis for caching"  # Examine a specific conclusion
+```
+
+---
+
+## Design Philosophy
+
+- **Don't burn your tokens** — No index pre-injection, no silent background matching, search only on demand
+- **No external dependencies** — grep + filesystem, no embedding APIs, no vector databases
+- **Don't break your flow** — You decide what to save, one gentle reminder at session end
+- **You make the call** — We surface experience and perspective, the conclusion is always yours
