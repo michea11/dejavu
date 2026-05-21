@@ -1,7 +1,7 @@
 ---
 name: gotcha
 description: Save and search troubleshooting gotchas. Use when user encounters errors, debugs issues, or needs to recall past fixes. /gotcha save to record, /gotcha <keyword> to search, /gotcha to list all.
-argument-hint: [save|search|delete|fix] [keyword|slug]
+argument-hint: "[save|search|delete|fix] [keyword|slug]"
 allowed-tools: [Read, Write, Bash, Grep, Glob]
 ---
 

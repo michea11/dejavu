@@ -1,7 +1,7 @@
 ---
 name: flip
 description: Shift perspective on design decisions to find blind spots. Use when discussing architecture, choosing between approaches, making technical decisions, or finalizing designs. /flip to examine from a missing angle.
-argument-hint: [conclusion]
+argument-hint: "[conclusion]"
 allowed-tools: []
 ---
 
