@@ -5,7 +5,7 @@
 
 ---
 
-# 中文
+# [中文]
 
 # déjà vu
 
@@ -13,6 +13,37 @@
 > 你已经做的决策，不应该只有一个角度看。
 
 **déjà vu** 是一个 Claude Code 插件，包含两个零依赖的技能，专门解决 AI 编码中"重复浪费"的问题。
+
+---
+
+## 安装
+
+```bash
+# 添加自托管市场（只需一次）
+/plugin marketplace add michea11/dejavu
+
+# 安装插件
+/plugin install dejavu@michea11-dejavu
+```
+
+---
+
+## 用法
+
+```bash
+# gotcha —— 踩坑记忆，grep + 文件系统，零依赖
+
+/gotcha save              # 把最近一次排查过程存成 experience
+/gotcha <关键词>           # 搜索匹配的 experience，命中则注入完整内容
+/gotcha                    # 列出所有 experience，按时间倒序
+/gotcha fix <slug>         # 标记已修复（不删除，下次匹配时提示）
+/gotcha delete <slug>      # 删除指定 experience（会先确认）
+
+# flip —— 换角度审视，纯过程技能，不读写文件
+
+/flip                      # 对当前讨论的最新结论，找个缺席的视角审视
+/flip "用 redis 做缓存"     # 对指定结论做审视
+```
 
 ---
 
@@ -72,37 +103,6 @@ AI 编码最大的隐性成本不是 GPU，是 **重复思考**。
 
 ---
 
-## 安装
-
-```bash
-# 添加自托管市场（只需一次）
-/plugin marketplace add michea11/dejavu
-
-# 安装插件
-/plugin install dejavu@michea11-dejavu
-```
-
----
-
-## 用法
-
-```bash
-# gotcha —— 踩坑记忆，grep + 文件系统，零依赖
-
-/gotcha save              # 把最近一次排查过程存成 experience
-/gotcha <关键词>           # 搜索匹配的 experience，命中则注入完整内容
-/gotcha                    # 列出所有 experience，按时间倒序
-/gotcha fix <slug>         # 标记已修复（不删除，下次匹配时提示）
-/gotcha delete <slug>      # 删除指定 experience（会先确认）
-
-# flip —— 换角度审视，纯过程技能，不读写文件
-
-/flip                      # 对当前讨论的最新结论，找个缺席的视角审视
-/flip "用 redis 做缓存"     # 对指定结论做审视
-```
-
----
-
 ## 设计哲学
 
 - **不主动消耗你的 token** — 不预注入索引，不静默后台匹配，只在调用时检索
@@ -123,6 +123,37 @@ AI 编码最大的隐性成本不是 GPU，是 **重复思考**。
 > You shouldn't make decisions from only one angle.
 
 **déjà vu** is a Claude Code plugin with two zero-dependency skills purpose-built to eliminate wasteful re-thinking in AI-assisted coding.
+
+---
+
+## Install
+
+```bash
+# Add self-hosted marketplace (once)
+/plugin marketplace add michea11/dejavu
+
+# Install the plugin
+/plugin install dejavu@michea11-dejavu
+```
+
+---
+
+## Usage
+
+```bash
+# gotcha — troubleshooting memory, grep + filesystem, zero deps
+
+/gotcha save              # Save the most recent debugging session as a gotcha
+/gotcha <keyword>         # Search matched gotchas, inject full content on hit
+/gotcha                    # List all gotchas, newest first
+/gotcha fix <slug>         # Mark as fixed (keeps record, annotates on future match)
+/gotcha delete <slug>      # Delete a gotcha (confirms first)
+
+# flip — perspective shift, pure process skill, no file I/O
+
+/flip                      # Examine the latest conclusion from a missing angle
+/flip "use redis for caching"  # Examine a specific conclusion
+```
 
 ---
 
@@ -179,37 +210,6 @@ Same `SKILL.md` works across all major AI coding tools:
 | Gemini CLI | `.gemini/skills/` |
 
 Clone once, your tool picks up the right directory. Claude Code gets the full-featured version, other platforms get the universal subset.
-
----
-
-## Install
-
-```bash
-# Add self-hosted marketplace (once)
-/plugin marketplace add michea11/dejavu
-
-# Install the plugin
-/plugin install dejavu@michea11-dejavu
-```
-
----
-
-## Usage
-
-```bash
-# gotcha — troubleshooting memory, grep + filesystem, zero deps
-
-/gotcha save              # Save the most recent debugging session as a gotcha
-/gotcha <keyword>         # Search matched gotchas, inject full content on hit
-/gotcha                    # List all gotchas, newest first
-/gotcha fix <slug>         # Mark as fixed (keeps record, annotates on future match)
-/gotcha delete <slug>      # Delete a gotcha (confirms first)
-
-# flip — perspective shift, pure process skill, no file I/O
-
-/flip                      # Examine the latest conclusion from a missing angle
-/flip "use redis for caching"  # Examine a specific conclusion
-```
 
 ---
 
