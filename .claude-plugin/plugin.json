@@ -1,0 +1,18 @@
+{
+  "name": "gotcha-flip",
+  "version": "1.0.0",
+  "description": "重复经验复用工具集：gotcha 踩坑记忆 + flip 换角度审视",
+  "author": {
+    "name": "michea11"
+  },
+  "repository": "https://github.com/michea11/gotcha-flip",
+  "license": "MIT",
+  "keywords": [
+    "debugging",
+    "design-review",
+    "gotcha",
+    "perspective",
+    "skills"
+  ],
+  "skills": ["./skills/"]
+}
