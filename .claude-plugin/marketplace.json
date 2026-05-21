@@ -1,0 +1,22 @@
+{
+  "name": "michea11-dejavu",
+  "description": "déjà vu for coding: gotcha 踩坑记忆 + flip 换角度审视",
+  "owner": {
+    "name": "michea11"
+  },
+  "plugins": [
+    {
+      "name": "dejavu",
+      "description": "déjà vu for coding: gotcha 踩坑记忆 + flip 换角度审视",
+      "version": "1.0.0",
+      "source": "./",
+      "author": {
+        "name": "michea11"
+      },
+      "homepage": "https://github.com/michea11/dejavu",
+      "repository": "https://github.com/michea11/dejavu",
+      "license": "MIT",
+      "keywords": ["debugging", "design-review", "gotcha", "perspective", "skills"]
+    }
+  ]
+}
