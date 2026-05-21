@@ -9,10 +9,10 @@
 
 ```bash
 # 添加市场
-/plugin marketplace add michea11/gotcha-flip
+/plugin marketplace add michea11/rethink-skills
 
 # 安装
-/plugin install gotcha-flip@michea11-gotcha-flip
+/plugin install rethink-skills@michea11-rethink-skills
 ```
 
 ## 用法

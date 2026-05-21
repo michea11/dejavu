@@ -1,11 +1,11 @@
 {
-  "name": "gotcha-flip",
+  "name": "rethink-skills",
   "version": "1.0.0",
-  "description": "重复经验复用工具集：gotcha 踩坑记忆 + flip 换角度审视",
+  "description": "重新思考工具集：gotcha 复用过去踩过的坑 + flip 换个角度看当前的决策",
   "author": {
     "name": "michea11"
   },
-  "repository": "https://github.com/michea11/gotcha-flip",
+  "repository": "https://github.com/michea11/rethink-skills",
   "license": "MIT",
   "keywords": [
     "debugging",
