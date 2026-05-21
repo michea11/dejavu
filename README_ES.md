@@ -19,94 +19,176 @@
 
 <p align="center">
   <em>No vuelvas a depurar el mismo error. No tomes decisiones desde un solo ángulo.<br>
-  Dos habilidades. Cero dependencias. Un comando para recordarlo todo.</em>
+  Dos habilidades. Cero dependencias. Elimina el mayor costo oculto de la programación con IA.</em>
 </p>
 
 <br>
 
-## Por qué
+## Por qué déjà vu
 
-El mayor costo oculto de la programación con IA no es la GPU — es **volver a pensar** lo que ya resolviste.
+El mayor costo oculto en la programación con IA no son las horas de GPU ni las facturas de API — es **volver a pensar**.
 
-| Escenario | Antes | Con déjà vu |
-|---|---|---|
-| El mismo error aparece otra vez | 10+ rondas de depuración | `/gotcha <clave>` — solución instantánea |
-| Nadie discute la decisión de diseño | Punto ciego encontrado en producción | `/flip` — detectado antes de publicar |
-| Tercera vez en el mismo problema | Empezar de cero | Búsqueda de 3 segundos |
-| Algo no cuadra, no sabes qué | Dudas, publicas igual | Revisión sistemática con un comando |
+**Mismo error, depurado tres veces.** Cada vez, la IA relee el código, reanaliza la traza de pila, rederiva la solución. Los tokens quemados en reinvestigación superan con creces el costo de la solución real.
 
-> **Cada acierto ahorra más del 90% de los tokens que gastarías reinvestigando desde cero.**
+**Misma decisión, una sola perspectiva.** La IA es excelente ejecutando, no diciendo "oye, ¿y el ángulo que no estamos viendo?" Nadie cuestiona la premisa hasta que se rompe en producción.
 
-<br>
+déjà vu hace dos cosas:
+- **gotcha** — registra sesiones de depuración, recupéralas instantáneamente la próxima vez. Sin reinvestigación
+- **flip** — antes de fijar una decisión, examínala desde una perspectiva que nadie consideró
+
+Dos habilidades complementarias: gotcha ahorra tokens en **trabajo repetido**, flip te salva de **decisiones equivocadas**.
+
+---
 
 ## Instalación
 
 ```bash
-/plugin marketplace add michea11/dejavu    # una vez
-/plugin install dejavu@michea11-dejavu     # listo
+/plugin marketplace add michea11/dejavu    # añadir marketplace, una vez
+/plugin install dejavu@michea11-dejavu     # instalar el plugin
 ```
 
-Solo dos comandos.
+Dos comandos y `/gotcha` y `/flip` están listos.
 
-<br>
+---
 
-## Uso
+## gotcha — Memoria de Resolución
+
+### Qué problema resuelve
+
+Depuras un fallo de CI. Después de 10 rondas de conversación, encuentras la causa raíz: la imagen base de Docker fijó un SHA antiguo. La semana siguiente, el mismo error. La IA empieza de cero — otras 10 rondas. **Pagaste dos veces por la misma respuesta.**
+
+gotcha asegura que esto solo ocurra una vez.
+
+### Uso
 
 ```bash
-# ── gotcha: memoria de resolución ──
-
+# Después de arreglar un bug, guarda la experiencia
 /gotcha save
-# → escanea la última sesión de depuración, extrae síntoma + causa + solución
-# → presenta un borrador, confirmas → guardado en .claude/gotchas/
+# → La IA escanea tu sesión de depuración reciente
+# → Extrae: cuál era el síntoma, cuál fue la causa raíz, qué lo solucionó
+# → Presenta un borrador, confirmas → guardado
 
+# La próxima vez, busca en lugar de reinvestigar
 /gotcha CI killed
-# → búsqueda grep en milisegundos. Un resultado → inyecta. Varios → tú eliges.
+# → búsqueda grep en milisegundos
+# → Un resultado → inyecta contenido completo, omite la depuración
+# → Varios resultados → lista títulos, tú eliges
 
-/gotcha                    # → lista todos, más recientes primero
-/gotcha fix <slug>         # → marca como corregido (conserva el registro)
-/gotcha delete <slug>      # → elimina (pide confirmación)
+# Gestiona tu biblioteca de gotchas
+/gotcha                    # Lista todos, más recientes primero
+/gotcha fix <slug>         # Marca como corregido (conserva registro, anota al coincidir)
+/gotcha delete <slug>      # Elimina (confirma primero)
 ```
+
+### Formato de Archivo
+
+Cada gotcha es un archivo Markdown plano bajo `.claude/gotchas/`:
+
+```markdown
+---
+tags: [CI, OOM, GitHub-Actions]
+created: "2026-05-21"
+fixed: false
+---
+
+# 症状
+CI 报 killed 但本地正常
+
+# 原因
+GitHub Actions runner 只有 7GB 内存
+
+# 解法
+NODE_OPTIONS=--max-old-space-size=4096
+```
+
+Legible, editable, rastreable con git. Sin cajas negras.
+
+### Diseño
+
+- **Costo token cero al fallar** — sin preinyección de índices, sin búsqueda en segundo plano. Solo busca cuando invocas `/gotcha`
+- **No intrusivo** — tú decides cuándo guardar. Un recordatorio suave al final de la sesión
+- **Configurable** — nivel de sugerencia, recordatorio de sesión, rigurosidad de duplicados, todo ajustable
+
+---
+
+## flip — Cambio de Perspectiva
+
+### Qué problema resuelve
+
+Tú y la IA discuten opciones y deciden usar Redis para caché. Durante la discusión, están en el marco de "cómo implementar caché Redis". Nadie pregunta "¿necesitamos caché?" o "¿un objeto grande reventará Redis?" **Estos puntos ciegos aparecen en producción.**
+
+flip examina tu conclusión desde un ángulo que faltaba en la discusión — antes de publicar.
+
+### Uso
 
 ```bash
-# ── flip: cambio de perspectiva ──
-
+# Examina la última conclusión desde un ángulo faltante
 /flip
-# → "¿Qué ángulo nos falta?" → examina desde esa perspectiva ausente
+# → La IA pregunta: ¿qué perspectiva estuvo ausente en esta discusión?
+# → Examina la conclusión desde ese ángulo faltante
+# → Encuentra punto ciego → sugiere corrección. Sin punto ciego → confirma
 
-/flip "usar redis para caché"
-# → examina una conclusión específica desde un ángulo ausente
+# Examina una conclusión específica
+/flip "usar Redis para caché"
 ```
 
-<br>
+### Qué Ángulo
 
-## Características
+flip elige dinámicamente la perspectiva que falta en la discusión. No usa "el opuesto" por defecto:
 
-- **Cero dependencias** — grep + sistema de archivos. Sin APIs de embeddings, sin bases de datos vectoriales
-- **Costo cero de tokens si no hay coincidencia** — sin preinyección de índices, sin búsqueda en segundo plano
-- **Multiplataforma** — el mismo SKILL.md funciona en Claude Code / Codex / Cursor / Copilot / Windsurf / Gemini CLI
-- **No intrusivo** — tú decides cuándo guardar. Un recordatorio suave al final de la sesión
-- **Almacenamiento Markdown** — los gotchas son archivos `.md`. Legibles, editables, rastreables con git
+| Ángulo | Pregunta |
+|---|---|
+| Opuesto | "¿Y si no lo hacemos?" |
+| Costo | "¿Cuánto tiempo/dinero? ¿Vale la pena?" |
+| Simplificar | "¿Podemos hacer menos? ¿Podemos omitirlo?" |
+| Tiempo | "¿De qué nos arrepentiríamos en 3 meses?" |
+| Novato | "¿Qué confundiría a alguien sin contexto?" |
+| Extremo | "¿Dónde se rompe con uso inesperado?" |
+| Escala | "¿Qué falla primero a 10x volumen?" |
 
-<br>
+Un ángulo por invocación — el que tiene más probabilidades de revelar un punto ciego.
+
+### Diseño
+
+- **No es un debate** — si el ángulo confirma, sigue adelante. No es contradecir por contradecir
+- **No es brainstorming** — brainstorming explora posibilidades, flip examina conclusiones existentes
+- **Tú decides** — flip ofrece perspectiva, la conclusión siempre es tuya
+- **Configurable** — nivel de sugerencia: apagado / en decisiones clave / en cada conclusión
+
+---
 
 ## Multiplataforma
 
-| Herramienta | Directorio de Habilidades |
-|---|---|
-| Claude Code | `.claude/skills/` |
-| OpenAI Codex CLI | `.agents/skills/` |
-| Cursor | `.cursor/skills/` |
-| GitHub Copilot | `.github/skills/` |
-| Windsurf | `.windsurf/skills/` |
-| Gemini CLI | `.gemini/skills/` |
+Mismo `SKILL.md`, una base de código, seis plataformas:
 
-Clona una vez — tu herramienta carga automáticamente el directorio correcto.
+| Herramienta | Directorio de Habilidades | Versión |
+|---|---|---|
+| Claude Code | `.claude/skills/` | Completa (allowed-tools, argument-hint incluidos) |
+| OpenAI Codex CLI | `.agents/skills/` | Neutral |
+| Cursor | `.cursor/skills/` | Neutral |
+| GitHub Copilot | `.github/skills/` | Neutral |
+| Windsurf | `.windsurf/skills/` | Neutral |
+| Gemini CLI | `.gemini/skills/` | Neutral |
 
-<br>
+Clona en los directorios de tus herramientas. Al actualizar habilidades, ejecuta `scripts/sync-skills.sh` para sincronizar todas las plataformas.
 
-## Filosofía
+---
 
-- **No quemes tus tokens** — búsqueda solo bajo demanda
-- **No interrumpas tu flujo** — tú decides qué guardar
-- **Sin magia** — grep + sistema de archivos. Comprensible, depurable, costo cero
-- **Tú tienes el control** — ofrecemos experiencia y perspectiva, la conclusión es tuya
+## Por qué déjà vu
+
+| | Enfoque Actual | déjà vu |
+|---|---|---|
+| Guardar experiencia | Escribir manualmente CLAUDE.md / .cursorrules. La gente olvida | Un comando, la IA extrae, tú confirmas |
+| Encontrar experiencia | grep manual, desplazarse por el historial, volver a preguntar a la IA | `/gotcha <clave>`, resultado en milisegundos |
+| Revisar decisiones | Intuición, experiencia, revisión de código | `/flip`, cambio sistemático de perspectiva |
+| Sobrecarga de tokens | Archivos de reglas cargados completos. Pagas incluso sin usar | Cero preinyección. Pagas solo cuando buscas |
+| Dependencias | APIs de embedding, bases de datos vectoriales | grep + sistema de archivos, cero dependencias externas |
+
+---
+
+## Filosofía de Diseño
+
+- **No quemes tus tokens** — Solo búsqueda bajo demanda. Sin preinyección, sin búsqueda en segundo plano
+- **Sin dependencias externas** — grep + sistema de archivos. Comprensible, depurable, costo cero
+- **No interrumpas tu flujo** — Tú decides cuándo guardar. Un recordatorio suave, sin insistencia
+- **Tú tienes el control** — Ofrecemos experiencia y perspectiva. La conclusión siempre es tuya
