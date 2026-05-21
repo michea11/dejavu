@@ -34,6 +34,21 @@ AI 编码最大的隐性成本不是 GPU，是 **重复思考**。
 - 不注入索引，不命中零 token 开销
 - 会话结束弱提醒，不骚扰
 
+## 跨平台支持
+
+同一个 SKILL.md，所有主流 AI 编码工具都能用：
+
+| 工具 | 技能目录 |
+|---|---|
+| Claude Code | `.claude/skills/` |
+| OpenAI Codex CLI | `.agents/skills/` |
+| Cursor | `.cursor/skills/` |
+| GitHub Copilot | `.github/skills/` |
+| Windsurf | `.windsurf/skills/` |
+| Gemini CLI | `.gemini/skills/` |
+
+克隆仓库后，你的工具会自动加载对应目录的技能。Claude Code 版本保留完整功能（`allowed-tools`、`argument-hint`），其他平台版本仅去掉平台专属字段。
+
 ### flip — 换角度审视
 
 ```
