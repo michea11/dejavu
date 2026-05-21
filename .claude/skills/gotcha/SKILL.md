@@ -83,11 +83,7 @@ If `<slug|keyword>` matches a filename exactly, delete it. If it's a keyword, gr
 
 ### /gotcha fix <slug>
 
-Update the frontmatter of the gotcha file to set `fixed: true`:
-
-```bash
-sed -i '' 's/fixed: false/fixed: true/' .claude/gotchas/<slug>.md
-```
+Update the frontmatter of the gotcha file to set `fixed: true` — read the file, replace `fixed: false` with `fixed: true` in the frontmatter, and write it back. No sed dependency needed.
 
 ## File Format
 

@@ -1,13 +1,13 @@
 {
   "name": "michea11-dejavu",
-  "description": "déjà vu for coding: gotcha 踩坑记忆 + flip 换角度审视",
+  "description": "déjà vu for coding: gotcha 复用踩过的坑 + flip 换个角度看决策",
   "owner": {
     "name": "michea11"
   },
   "plugins": [
     {
       "name": "dejavu",
-      "description": "déjà vu for coding: gotcha 踩坑记忆 + flip 换角度审视",
+      "description": "déjà vu for coding: gotcha 复用踩过的坑 + flip 换个角度看决策",
       "version": "1.0.0",
       "source": "./",
       "author": {
