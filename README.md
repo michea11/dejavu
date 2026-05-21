@@ -1,11 +1,11 @@
 <p align="center">
-  <a href="#-中文"><img src="https://img.shields.io/badge/中文-🇨🇳-red?style=for-the-badge" alt="中文"></a>
-  <a href="#-english"><img src="https://img.shields.io/badge/English-🇺🇸-blue?style=for-the-badge" alt="English"></a>
+  <a href="#中文"><img src="https://img.shields.io/badge/中文-red?style=for-the-badge" alt="中文"></a>
+  <a href="#english"><img src="https://img.shields.io/badge/English-blue?style=for-the-badge" alt="English"></a>
 </p>
 
 ---
 
-# 🇨🇳 中文
+# 中文
 
 # déjà vu
 
@@ -115,7 +115,7 @@ AI 编码最大的隐性成本不是 GPU，是 **重复思考**。
 <br>
 <br>
 
-# 🇺🇸 English
+# English
 
 # déjà vu
 
